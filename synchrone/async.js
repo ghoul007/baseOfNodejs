@@ -1,5 +1,8 @@
 exports.getRandomNumber = (maxValue, callback) => {
     setTimeout(() => {
+        if (typeof maxValue !== 'number') {
+            return callback(new Error('ivalid type'), null)
+        }
         const result = Math.floor(Math.random() * maxValue);
         callback(null, result);
     }, 0);

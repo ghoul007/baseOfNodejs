@@ -2,7 +2,7 @@ const syn = require('./synchrone/sync');
 const asyn = require('./synchrone/async');
 
 console.log('before')
-asyn.getRandomNumber(5, (err, res) => {
+asyn.getRandomNumber('5', (err, res) => {
     if (err) throw err;
     console.log(res)
 })
