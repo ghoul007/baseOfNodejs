@@ -7,14 +7,18 @@ bla bla`
 class StreamText extends Readable {
 
     constructor(text) {
-        super();
+        super({ objectMode: true });
         this.text = text;
         this.sentense = text.split('/n');
     }
 
     _read() {
         this.sentense.map(data => {
-            this.push(data);
+            const obj = {
+                data: data,
+                length:data.length
+            }
+            this.push(obj);
         })
         this.push(null)
     }
@@ -23,7 +27,7 @@ class StreamText extends Readable {
 const streamText = new StreamText(text);
 
 streamText.on('data', (chunk) => {
-    console.log(chunk.toString());
+    console.log(JSON.stringify(chunk) );
 })
 
 streamText.on('end', () => console.log('end'))
